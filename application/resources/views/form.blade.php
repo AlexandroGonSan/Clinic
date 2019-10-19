@@ -1,0 +1,5 @@
+@include('menu')
+@include('fontawesome')
+@include('form.css')
+@include('form.js')
+@include('form.html')
