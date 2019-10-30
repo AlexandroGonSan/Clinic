@@ -19,3 +19,5 @@ Route::get('/', function () {
 })->name('home');
 Route::get('/', 'UserController@create')->name('home');
 Route::resource('paciente', 'PacienteController');
+Route::resource('user', 'UserController');
+Route::resource('paciente', 'PacienteController');
