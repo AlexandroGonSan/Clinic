@@ -17,4 +17,5 @@ Route::get('/', function () {
 Route::get('/', function () {
     return view('en');
 })->name('home');
+Route::get('/', 'UserController@create')->name('home');
 Route::resource('paciente', 'PacienteController');
