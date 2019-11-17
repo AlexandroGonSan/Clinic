@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+		// Creative-Tim
+        LaravelFrontendPresets\MaterialPreset\MaterialPresetServiceProvider::class,
 
         /*
          * Application Service Providers...

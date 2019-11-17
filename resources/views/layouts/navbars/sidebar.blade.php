@@ -17,30 +17,123 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
-      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
-          <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
-          <p>{{ __('Laravel Examples') }}
+      {{-- <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}"> --}}
+      
+      {{-- modified --}}
+      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management' || true) ? ' active' : '' }}">
+      
+        {{-- <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true"> --}}
+        
+        {{-- modified--}}
+        <a class="nav-link" data-toggle="collapse" href="#people" aria-expanded="false">
+        
+          {{-- <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i> --}}
+          <i class="material-icons">people</i>
+          <p>{{ __('People') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse show" id="laravelExample">
+        {{-- <div class="collapse show" id="laravelExample"> --}}
+        <div class="collapse" id="people">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('profile.edit') }}">
-                <span class="sidebar-mini"> UP </span>
-                <span class="sidebar-normal">{{ __('User profile') }} </span>
+              {{-- <a class="nav-link" href="{{ route('profile.edit') }}"> --}}
+              <a class="nav-link" href="{{ route('people.create') }}">
+                {{-- <span class="sidebar-mini"> UP </span> --}}
+				<i class="material-icons">note_add</i>
+                <span class="sidebar-normal">{{ __('Register') }} </span>
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('user.index') }}">
-                <span class="sidebar-mini"> UM </span>
-                <span class="sidebar-normal"> {{ __('User Management') }} </span>
+              <a class="nav-link" href="{{ route('people.index') }}">
+                {{-- <span class="sidebar-mini"> UM </span> --}}
+				<i class="material-icons">list</i>
+                <span class="sidebar-normal"> {{ __('List') }} </span>
               </a>
             </li>
           </ul>
         </div>
       </li>
+      
+	  <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#patient" aria-expanded="true">
+          <i class="material-icons">pregnant_woman</i>
+          <p>{{ __('Patient') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        {{-- <div class="collapse show" id="Patient"> --}}
+        <div class="collapse" id="patient">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('patient.create') }}">
+				<i class="material-icons">note_add</i>
+                <span class="sidebar-normal">{{ __('Register') }} </span>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('patient.index') }}">
+				<i class="material-icons">list</i>
+                <span class="sidebar-normal"> {{ __('List') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
+	  <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#doctor" aria-expanded="true">
+          <i class="material-icons">next_week</i>
+          <p>{{ __('Doctor') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        {{-- <div class="collapse show" id="Doctor"> --}}
+        <div class="collapse" id="doctor">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('doctor.create') }}">
+				<i class="material-icons">note_add</i>
+                <span class="sidebar-normal">{{ __('Register') }} </span>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('doctor.index') }}">
+				<i class="material-icons">list</i>
+                <span class="sidebar-normal"> {{ __('List') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
+	  <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#receptionist" aria-expanded="true">
+          <i class="material-icons">create</i>
+          <p>{{ __('Receptionist') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        {{-- <div class="collapse show" id="receptionist"> --}}
+        <div class="collapse" id="receptionist">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('receptionist.create') }}">
+				<i class="material-icons">note_add</i>
+                <span class="sidebar-normal">{{ __('Register') }} </span>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('receptionist.index') }}">
+				<i class="material-icons">list</i>
+                <span class="sidebar-normal"> {{ __('List') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
+      {{--
       <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">content_paste</i>
@@ -83,6 +176,7 @@
           <p>{{ __('Upgrade to PRO') }}</p>
         </a>
       </li>
+	  --}}
     </ul>
   </div>
 </div>
