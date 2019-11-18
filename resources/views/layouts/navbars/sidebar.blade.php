@@ -17,166 +17,105 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
-      {{-- <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}"> --}}
+     
+			@php
+				$items = [];
+				
+				$aux = [];
+				$aux['label'] = 'People';
+				$aux['ico'] = strtolower($aux['label']);
+				$items[] = $aux;
+
+				$aux = [];
+				$aux['label'] = 'Patient';
+				$aux['ico'] = 'pregnant_woman';
+				$items[] = $aux;
+
+				$aux = [];
+				$aux['label'] = 'Doctor';
+				$aux['ico'] = 'next_week';
+				$items[] = $aux;
+
+				$aux = [];
+				$aux['label'] = 'Receptionist';
+				$aux['ico'] = 'note_add';
+				$items[] = $aux;
+				
+				// echo '<pre>';
+				// var_dump($items);
+				// echo '<pre>';
+				// return;
+			@endphp
+      @foreach($items as $item)
+				@php
+					$label = $item['label'];
+					$id = strtolower($label);
+					$onclick = $id.'()';
+					$ico = $item['ico'];
+				@endphp
+				
+				<script>
+					function {{$id}}()
+					{
+						//o onclick é executado antes de alterar o check do box
+						//o onclick substitui a função padrão que executa ao clicar
+						if ( $('#{{$id}}')[0].checked )
+						{
+							$('#register')[0].href = '#';
+							$('#list')[0].href = '#';
+							$('#{{$id}}')[0].checked = false;
+						}
+						else if ( !$('#{{$id}}')[0].checked )
+						{
+							$('#register')[0].href = '{{ route($id.'.create') }}';
+							$('#list')[0].href = '{{ route($id.'.index') }}';
+							
+							$('#people')[0].checked = false;
+							$('#patient')[0].checked = false;
+							$('#doctor')[0].checked = false;
+							$('#receptionist')[0].checked = false;
+							
+							$('#{{$id}}')[0].checked = true;
+						}
+					}
+				</script>
+				<!-- checked -->
+				<li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
+				<a class="nav-link" href="#" onclick="{{$onclick}}">
+					<table>
+					<tr>
+						<td>
+						<div class="form-check" style="margin-bottom:1.65rem">
+							<label class="form-check-label">
+							<input id="{{$id}}" class="form-check-input" type="checkbox" value="" onclick="{{$onclick}}">
+							<span class="form-check-sign">
+								<span class="check"></span>
+							</span>
+							</label>
+						</div>
+						</td>
+						<td>
+						<i class="material-icons">{{$ico}}</i>
+						<p>{{ __($label) }}</p>
+						</td>
+					</tr>
+					</table>
+				</a>
+				</li>
+			@endforeach
       
-      {{-- modified --}}
-      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management' || true) ? ' active' : '' }}">
-      
-        {{-- <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true"> --}}
-        
-        {{-- modified--}}
-        <a class="nav-link" data-toggle="collapse" href="#people" aria-expanded="false">
-        
-          {{-- <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i> --}}
-          <i class="material-icons">people</i>
-          <p>{{ __('People') }}
-            <b class="caret"></b>
-          </p>
-        </a>
-        {{-- <div class="collapse show" id="laravelExample"> --}}
-        <div class="collapse" id="people">
-          <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              {{-- <a class="nav-link" href="{{ route('profile.edit') }}"> --}}
-              <a class="nav-link" href="{{ route('people.create') }}">
-                {{-- <span class="sidebar-mini"> UP </span> --}}
-				<i class="material-icons">note_add</i>
-                <span class="sidebar-normal">{{ __('Register') }} </span>
-              </a>
-            </li>
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('people.index') }}">
-                {{-- <span class="sidebar-mini"> UM </span> --}}
-				<i class="material-icons">list</i>
-                <span class="sidebar-normal"> {{ __('List') }} </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      
-	  <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#patient" aria-expanded="true">
-          <i class="material-icons">pregnant_woman</i>
-          <p>{{ __('Patient') }}
-            <b class="caret"></b>
-          </p>
-        </a>
-        {{-- <div class="collapse show" id="Patient"> --}}
-        <div class="collapse" id="patient">
-          <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('patient.create') }}">
-				<i class="material-icons">note_add</i>
-                <span class="sidebar-normal">{{ __('Register') }} </span>
-              </a>
-            </li>
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('patient.index') }}">
-				<i class="material-icons">list</i>
-                <span class="sidebar-normal"> {{ __('List') }} </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      
-	  <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#doctor" aria-expanded="true">
-          <i class="material-icons">next_week</i>
-          <p>{{ __('Doctor') }}
-            <b class="caret"></b>
-          </p>
-        </a>
-        {{-- <div class="collapse show" id="Doctor"> --}}
-        <div class="collapse" id="doctor">
-          <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('doctor.create') }}">
-				<i class="material-icons">note_add</i>
-                <span class="sidebar-normal">{{ __('Register') }} </span>
-              </a>
-            </li>
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('doctor.index') }}">
-				<i class="material-icons">list</i>
-                <span class="sidebar-normal"> {{ __('List') }} </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      
-	  <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#receptionist" aria-expanded="true">
-          <i class="material-icons">create</i>
-          <p>{{ __('Receptionist') }}
-            <b class="caret"></b>
-          </p>
-        </a>
-        {{-- <div class="collapse show" id="receptionist"> --}}
-        <div class="collapse" id="receptionist">
-          <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('receptionist.create') }}">
-				<i class="material-icons">note_add</i>
-                <span class="sidebar-normal">{{ __('Register') }} </span>
-              </a>
-            </li>
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('receptionist.index') }}">
-				<i class="material-icons">list</i>
-                <span class="sidebar-normal"> {{ __('List') }} </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      
-      {{--
-      <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('table') }}">
-          <i class="material-icons">content_paste</i>
-            <p>{{ __('Table List') }}</p>
+      <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
+        <a id="register" class="nav-link" href="#">
+          <i class="material-icons">note_add</i>
+            <p>{{ __('Register') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('typography') }}">
-          <i class="material-icons">library_books</i>
-            <p>{{ __('Typography') }}</p>
+        <a id="list" class="nav-link" href="#">
+          <i class="material-icons">list</i>
+            <p>{{ __('List') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('icons') }}">
-          <i class="material-icons">bubble_chart</i>
-          <p>{{ __('Icons') }}</p>
-        </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('map') }}">
-          <i class="material-icons">location_ons</i>
-            <p>{{ __('Maps') }}</p>
-        </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('notifications') }}">
-          <i class="material-icons">notifications</i>
-          <p>{{ __('Notifications') }}</p>
-        </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('language') }}">
-          <i class="material-icons">language</i>
-          <p>{{ __('RTL Support') }}</p>
-        </a>
-      </li>
-      <li class="nav-item active-pro{{ $activePage == 'upgrade' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('upgrade') }}">
-          <i class="material-icons">unarchive</i>
-          <p>{{ __('Upgrade to PRO') }}</p>
-        </a>
-      </li>
-	  --}}
     </ul>
   </div>
 </div>
