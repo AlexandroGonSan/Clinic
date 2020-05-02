@@ -1,10 +1,10 @@
-# Pacientes
+# Clinic
 Sistema para gerenciamento de pacientes .
 # Marca
 CLInIC
 # Names History
-Pacientes
-Clinic
+- Pacientes
+- Clinic
 ## WebSite
 ### Atual
 ### History
